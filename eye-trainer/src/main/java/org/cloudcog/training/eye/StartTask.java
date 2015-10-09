@@ -32,6 +32,7 @@ public class StartTask extends TimerTask {
 		});
         timer.start();
         f.setVisible(true);
+        f.toFront();
     }
 
 	@Override
