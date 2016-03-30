@@ -12,12 +12,12 @@ import java.util.Timer;
 
 import javax.swing.ImageIcon;
 
-/**
- * Hello world!
- *
- */
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Main 
 {
+	private static final Logger log = LoggerFactory.getLogger(Main.class);
 	static Timer timer; 
     public static void main( String[] args )
     {
@@ -27,8 +27,9 @@ public class Main
     }
 
 	private static void runScheduler() {
+		log.info("Starting scheduler");
 		timer = new Timer();
-    	timer.schedule(new StartTask(), 3600000);
+		timer.schedule(new StartTask(), 3600000, 3600000);
 	}
 
 	private static void setTrayIcon() {
@@ -82,15 +83,12 @@ public class Main
 	}
 	
 	protected static void runAppNow() {
-		if(timer != null) {
-			timer.cancel();
-		}
-		runScheduler();
 		new StartTask().run();
 		
 	}
 
 	private static void closeApplication() {
+		log.info("Closing the app");
 		if(timer != null) {
 			timer.cancel();
 		}
